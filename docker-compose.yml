@@ -1,0 +1,12 @@
+services:
+  app:
+    tty: true
+    stdin_open: true
+    environment:
+      - EDITOR=vi
+    image: slidict/docker-rails:node18.12.1-npm9.7.2-ruby3.2.2-bundler-2.4.13
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bash
+    restart: always
