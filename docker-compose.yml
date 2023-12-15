@@ -4,7 +4,7 @@ services:
     stdin_open: true
     environment:
       - EDITOR=vi
-    image: slidict/docker-rails:node18.12.1-npm9.7.2-ruby3.2.2-bundler-2.4.13
+    image: slidict/docker-rails:node20.10.0-npm10.2.5-ruby3.2.2-bundler-2.4.13
     build:
       context: .
       dockerfile: Dockerfile

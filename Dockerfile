@@ -5,8 +5,8 @@ ARG RAILS_ENV
 ENV LANG "C.UTF-8"
 ENV NOKOGIRI_USE_SYSTEM_LIBRARIES "YES"
 ENV TZ "UTC"
-ENV NODE_VERSION="18.12.1"
-ENV NPM_VERSION="9.7.2"
+ENV NODE_VERSION="20.10.0"
+ENV NPM_VERSION="10.2.5"
 ENV RUBY_VERSION="3.2.2"
 ENV BUNDLER_VERSION="2.4.13"
 ENV RUBY_SHA256="96c57558871a6748de5bc9f274e93f4b5aad06cd8f37befa0e8d94e7b8a423bc"
@@ -23,6 +23,7 @@ RUN apt-get install --no-install-recommends -y tzdata git
 RUN apt-get install --no-install-recommends -y nginx python2 unzip
 RUN apt-get install --no-install-recommends -y chromium imagemagick file
 RUN apt-get install --no-install-recommends -y curl procps
+RUN apt-get update
 RUN apt-get install --no-install-recommends -y libyaml-dev libmagickwand-dev libmecab-dev libxslt-dev libmagic-dev libssl-dev libmariadb-dev
 
 RUN apt-get install -y build-essential
@@ -49,8 +50,8 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 RUN apt-get update
 RUN apt-get install --no-install-recommends -y yarn npm
 RUN npm install -g n
-RUN npm install -g npm@${NPM_VERSION}
 RUN n ${NODE_VERSION}
+RUN npm install -g npm@${NPM_VERSION}
 
 RUN gem install foreman
 CMD ["/bin/sh", "/app/entrypoint.sh"]
