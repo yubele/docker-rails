@@ -14,7 +14,7 @@ on:
     branches: [ "main" ]
 
 env:
-  REGISTRY: ""
+  REGISTRY: "docker.io"
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
 
