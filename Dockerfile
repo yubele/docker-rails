@@ -25,7 +25,6 @@ RUN apt-get install --no-install-recommends -y chromium imagemagick file
 RUN apt-get install --no-install-recommends -y curl procps
 RUN apt-get update
 RUN apt-get install --no-install-recommends -y libyaml-dev libmagickwand-dev libmecab-dev libxslt-dev libmagic-dev libssl-dev libmariadb-dev
-
 RUN apt-get install -y build-essential
 
 RUN mkdir /noto
@@ -54,4 +53,6 @@ RUN n ${NODE_VERSION}
 RUN npm install -g npm@${NPM_VERSION}
 
 RUN gem install foreman
+
+RUN apt-get upgrade -y
 CMD ["/bin/sh", "/app/entrypoint.sh"]
