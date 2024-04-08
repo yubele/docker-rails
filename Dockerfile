@@ -25,6 +25,7 @@ RUN apt-get install --no-install-recommends -y chromium imagemagick file
 RUN apt-get install --no-install-recommends -y curl procps
 RUN apt-get update
 RUN apt-get install --no-install-recommends -y libyaml-dev libmagickwand-dev libmecab-dev libxslt-dev libmagic-dev libssl-dev libmariadb-dev
+RUN apt-get install --no-install-recommends -y ffmpeg
 RUN apt-get install -y build-essential
 
 RUN mkdir /noto
