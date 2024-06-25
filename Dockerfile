@@ -17,7 +17,7 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 RUN apt-get update
 RUN apt-get install --no-install-recommends -y gnupg2 gnupg1 gnupg
-RUN apt-get install --no-install-recommends -y openjdk-11-jdk graphicsmagick graphviz
+RUN apt-get install --no-install-recommends -y openjdk-17-jdk graphicsmagick graphviz
 RUN apt-get install --no-install-recommends -y mecab-ipadic mecab-ipadic-utf8 mecab-utils
 RUN apt-get install --no-install-recommends -y tzdata git
 RUN apt-get install --no-install-recommends -y nginx python2 unzip
