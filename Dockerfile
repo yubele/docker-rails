@@ -19,7 +19,7 @@ RUN apt-get update
 RUN apt-get install --no-install-recommends -y gnupg2 gnupg1 gnupg
 RUN apt-get install --no-install-recommends -y openjdk-17-jdk graphicsmagick graphviz
 RUN apt-get install --no-install-recommends -y mecab-ipadic mecab-ipadic-utf8 mecab-utils
-RUN apt-get install --no-install-recommends -y tzdata git
+RUN apt-get install --no-install-recommends -y tzdata
 RUN apt-get install --no-install-recommends -y nginx python3 unzip
 RUN apt-get install --no-install-recommends -y chromium imagemagick file
 RUN apt-get install --no-install-recommends -y curl procps
@@ -27,6 +27,9 @@ RUN apt-get update
 RUN apt-get install --no-install-recommends -y libyaml-dev libmagickwand-dev libmecab-dev libxslt-dev libmagic-dev libssl-dev libmariadb-dev
 RUN apt-get install --no-install-recommends -y ffmpeg
 RUN apt-get install -y build-essential
+
+# Security Updates
+RUN apt-get remove -y nodejs libnss3
 
 RUN mkdir /noto
 ADD https://noto-website.storage.googleapis.com/pkgs/NotoSansCJKjp-hinted.zip /noto
