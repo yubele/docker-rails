@@ -1,4 +1,4 @@
-FROM debian:bookworm-slim
+FROM debian:bookworm-20240701-slim
 
 ARG RAILS_ENV
 
@@ -51,10 +51,9 @@ RUN gem install bundler -v ${BUNDLER_VERSION}
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt-get update
-RUN apt-get install --no-install-recommends -y yarn npm
-RUN npm install -g n
-RUN n ${NODE_VERSION}
-RUN npm install -g npm@${NPM_VERSION}
+RUN curl -fsSL https://fnm.vercel.app/install | bash && . /root/.bashrc && fnm use --install-if-missing ${NODE_VERSION}
+RUN . /root/.bashrc && npm install -g npm@${NPM_VERSION}
+RUN . /root/.bashrc && npm install --global yarn
 
 RUN gem install foreman
 
