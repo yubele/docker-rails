@@ -15,6 +15,8 @@ ENV RAILS_ENV=$RAILS_ENV
 ENV RAILS_SERVE_STATIC_FILES "1"
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
+SHELL ["/bin/bash", "-l", "-c"]
+
 RUN apt-get update
 RUN apt-get install --no-install-recommends -y gnupg2 gnupg1 gnupg
 RUN apt-get install --no-install-recommends -y openjdk-17-jdk graphicsmagick graphviz
