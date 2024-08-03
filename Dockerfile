@@ -23,7 +23,7 @@ RUN apt-get install --no-install-recommends -y openjdk-17-jdk graphicsmagick gra
 RUN apt-get install --no-install-recommends -y mecab-ipadic mecab-ipadic-utf8 mecab-utils
 RUN apt-get install --no-install-recommends -y tzdata
 RUN apt-get install --no-install-recommends -y nginx python3 unzip
-RUN apt-get install --no-install-recommends -y chromium imagemagick file
+RUN apt-get install --no-install-recommends -y imagemagick file
 RUN apt-get install --no-install-recommends -y curl procps
 RUN apt-get update
 RUN apt-get install --no-install-recommends -y libyaml-dev libmagickwand-dev libmecab-dev libxslt-dev libmagic-dev libssl-dev libmariadb-dev
@@ -52,12 +52,14 @@ RUN gem install bundler -v ${BUNDLER_VERSION}
 
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt-get update
 RUN curl -fsSL https://fnm.vercel.app/install | bash && . /root/.bashrc && fnm use --install-if-missing ${NODE_VERSION}
 RUN . /root/.bashrc && npm install -g npm@${NPM_VERSION}
 RUN . /root/.bashrc && npm install --global yarn
 
 RUN gem install foreman
+
+RUN apt-get update
+RUN apt-get install --no-install-recommends -y chromium
 
 RUN apt-get upgrade -y
 CMD ["/bin/sh", "/app/entrypoint.sh"]
