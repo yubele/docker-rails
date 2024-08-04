@@ -43,7 +43,7 @@ RUN unzip NotoSansCJKjp-hinted.zip && \
 RUN rm -rf /noto
 
 WORKDIR "/tmp"
-RUN MINOR=$(echo ${RUBY_VERSION} | sed -e 's/^\([0-9]\+\.[0-9]\+\)\..*$/\1/' ) curl https://cache.ruby-lang.org/pub/ruby/$MINOR/ruby-${RUBY_VERSION}.tar.gz -o ruby.tar.gz \
+RUN MINOR=$(echo ${RUBY_VERSION} | sed -e 's/^\([0-9]\+\.[0-9]\+\)\..*$/\1/' ) && curl https://cache.ruby-lang.org/pub/ruby/$MINOR/ruby-${RUBY_VERSION}.tar.gz -o ruby.tar.gz \
   && [ $(sha256sum ruby.tar.gz | awk '{print $1}') = "${RUBY_SHA256}" ]
 RUN tar zxf ruby.tar.gz -C .
 RUN cd ruby-${RUBY_VERSION} && ./configure && make && make install
