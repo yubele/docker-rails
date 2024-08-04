@@ -7,9 +7,9 @@ ENV NOKOGIRI_USE_SYSTEM_LIBRARIES "YES"
 ENV TZ "UTC"
 ENV NODE_VERSION="20.15.0"
 ENV NPM_VERSION="10.8.1"
-ENV RUBY_VERSION="3.3.3"
+ENV RUBY_VERSION="3.4.0-preview1"
 ENV BUNDLER_VERSION="2.5.14"
-ENV RUBY_SHA256="83c05b2177ee9c335b631b29b8c077b4770166d02fa527f3a9f6a40d13f3cce2"
+ENV RUBY_SHA256="1a3c322e90cb22e5fba0b5d257bb2be9988affa3867eba7642ed981fdde895bb"
 
 ENV RAILS_ENV=$RAILS_ENV
 ENV RAILS_SERVE_STATIC_FILES "1"
@@ -43,7 +43,7 @@ RUN unzip NotoSansCJKjp-hinted.zip && \
 RUN rm -rf /noto
 
 WORKDIR "/tmp"
-RUN curl https://cache.ruby-lang.org/pub/ruby/3.3/ruby-${RUBY_VERSION}.tar.gz -o ruby.tar.gz \
+RUN MINOR=$(echo ${RUBY_VERSION} | sed -e 's/^\([0-9]\+\.[0-9]\+\)\..*$/\1/' ) && curl https://cache.ruby-lang.org/pub/ruby/$MINOR/ruby-${RUBY_VERSION}.tar.gz -o ruby.tar.gz \
   && [ $(sha256sum ruby.tar.gz | awk '{print $1}') = "${RUBY_SHA256}" ]
 RUN tar zxf ruby.tar.gz -C .
 RUN cd ruby-${RUBY_VERSION} && ./configure && make && make install
