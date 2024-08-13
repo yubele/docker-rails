@@ -1,15 +1,15 @@
-FROM debian:bookworm-20240701-slim
+FROM debian:bookworm-20240812-slim
 
 ARG RAILS_ENV
 
 ENV LANG "C.UTF-8"
 ENV NOKOGIRI_USE_SYSTEM_LIBRARIES "YES"
 ENV TZ "UTC"
-ENV NODE_VERSION="20.15.0"
-ENV NPM_VERSION="10.8.1"
+ENV NODE_VERSION="20.16.0"
+ENV NPM_VERSION="10.8.2"
 ENV RUBY_VERSION="3.3.4"
-ENV BUNDLER_VERSION="2.5.14"
 ENV RUBY_SHA256="fe6a30f97d54e029768f2ddf4923699c416cdbc3a6e96db3e2d5716c7db96a34"
+ENV BUNDLER_VERSION="2.5.17"
 
 ENV RAILS_ENV=$RAILS_ENV
 ENV RAILS_SERVE_STATIC_FILES "1"
@@ -62,4 +62,5 @@ RUN apt-get update
 RUN apt-get install --no-install-recommends -y chromium
 
 RUN apt-get upgrade -y
-CMD ["/bin/sh", "/app/entrypoint.sh"]
+ENTRYPOINT [ "/bin/bash", "-lc" ]
+CMD [ "/app/entrypoint.sh" ]
