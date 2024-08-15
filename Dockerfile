@@ -1,4 +1,4 @@
-FROM node:20.16.0-bookworm-slim
+IFROM node:20.16.0-bookworm-slim
 
 ARG RAILS_ENV
 
@@ -29,9 +29,6 @@ RUN apt-get install --no-install-recommends -y libyaml-dev libmagickwand-dev lib
 RUN apt-get install --no-install-recommends -y ffmpeg
 RUN apt-get install -y build-essential
 
-# Security Updates
-RUN apt-get remove -y nodejs libnss3
-
 RUN mkdir /noto
 ADD https://noto-website.storage.googleapis.com/pkgs/NotoSansCJKjp-hinted.zip /noto
 WORKDIR /noto
@@ -48,8 +45,6 @@ RUN tar zxf ruby.tar.gz -C .
 RUN cd ruby-${RUBY_VERSION} && ./configure && make && make install
 RUN gem update --system
 RUN gem install bundler -v ${BUNDLER_VERSION}
-
-RUN npm install --global yarn
 
 RUN gem install foreman
 
