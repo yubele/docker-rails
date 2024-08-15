@@ -1,4 +1,4 @@
-IFROM node:20.16.0-bookworm-slim
+FROM node:20.16.0-bookworm-slim
 
 ARG RAILS_ENV
 
