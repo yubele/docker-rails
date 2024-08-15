@@ -1,11 +1,10 @@
-FROM debian:bookworm-20240812-slim
+FROM node:20.16.0-bookworm-slim
 
 ARG RAILS_ENV
 
 ENV LANG "C.UTF-8"
 ENV NOKOGIRI_USE_SYSTEM_LIBRARIES "YES"
 ENV TZ "UTC"
-ENV NODE_VERSION="20.16.0"
 ENV NPM_VERSION="10.8.2"
 ENV RUBY_VERSION="3.3.4"
 ENV RUBY_SHA256="fe6a30f97d54e029768f2ddf4923699c416cdbc3a6e96db3e2d5716c7db96a34"
@@ -50,11 +49,7 @@ RUN cd ruby-${RUBY_VERSION} && ./configure && make && make install
 RUN gem update --system
 RUN gem install bundler -v ${BUNDLER_VERSION}
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN curl -fsSL https://fnm.vercel.app/install | bash && . /root/.bashrc && fnm use --install-if-missing ${NODE_VERSION}
-RUN . /root/.bashrc && npm install -g npm@${NPM_VERSION}
-RUN . /root/.bashrc && npm install --global yarn
+RUN npm install --global yarn
 
 RUN gem install foreman
 
