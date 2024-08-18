@@ -5,7 +5,6 @@ ARG RAILS_ENV
 ENV LANG "C.UTF-8"
 ENV NOKOGIRI_USE_SYSTEM_LIBRARIES "YES"
 ENV TZ "UTC"
-ENV NPM_VERSION="10.8.2"
 ENV RUBY_VERSION="3.3.4"
 ENV RUBY_SHA256="fe6a30f97d54e029768f2ddf4923699c416cdbc3a6e96db3e2d5716c7db96a34"
 ENV BUNDLER_VERSION="2.5.17"
@@ -47,9 +46,6 @@ RUN gem update --system
 RUN gem install bundler -v ${BUNDLER_VERSION}
 
 RUN gem install foreman
-
-RUN apt-get update
-RUN apt-get install --no-install-recommends -y chromium
 
 RUN apt-get upgrade -y
 ENTRYPOINT [ "/bin/bash", "-lc" ]
