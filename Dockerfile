@@ -1,12 +1,12 @@
-FROM node:20.16.0-bookworm-slim
+FROM node:23.2.0-bookworm-slim
 
 ARG RAILS_ENV
 
 ENV LANG "C.UTF-8"
 ENV NOKOGIRI_USE_SYSTEM_LIBRARIES "YES"
 ENV TZ "UTC"
-ENV RUBY_VERSION="3.3.4"
-ENV RUBY_SHA256="fe6a30f97d54e029768f2ddf4923699c416cdbc3a6e96db3e2d5716c7db96a34"
+ENV RUBY_VERSION="3.3.6"
+ENV RUBY_SHA256="8dc48fffaf270f86f1019053f28e51e4da4cce32a36760a0603a9aee67d7fd8d"
 ENV BUNDLER_VERSION="2.5.17"
 
 ENV RAILS_ENV=$RAILS_ENV
@@ -26,6 +26,8 @@ RUN apt-get update
 RUN apt-get install --no-install-recommends -y libyaml-dev libmagickwand-dev libmecab-dev libxslt-dev libmagic-dev libssl-dev libmariadb-dev
 RUN apt-get install --no-install-recommends -y ffmpeg
 RUN apt-get install -y build-essential
+
+RUN apt-get install -y fonts-noto-cjk
 
 WORKDIR "/tmp"
 RUN MINOR=$(echo ${RUBY_VERSION} | sed -e 's/^\([0-9]\+\.[0-9]\+\)\..*$/\1/' ) && curl https://cache.ruby-lang.org/pub/ruby/$MINOR/ruby-${RUBY_VERSION}.tar.gz -o ruby.tar.gz \
