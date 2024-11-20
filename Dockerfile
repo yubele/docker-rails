@@ -1,11 +1,11 @@
-FROM node:20.16.0-bookworm-slim
+FROM node:23.2.0-bookworm-slim
 
 ARG RAILS_ENV
 
 ENV LANG "C.UTF-8"
 ENV NOKOGIRI_USE_SYSTEM_LIBRARIES "YES"
 ENV TZ "UTC"
-ENV RUBY_VERSION="3.3.4"
+ENV RUBY_VERSION="3.3.6"
 ENV RUBY_SHA256="fe6a30f97d54e029768f2ddf4923699c416cdbc3a6e96db3e2d5716c7db96a34"
 ENV BUNDLER_VERSION="2.5.17"
 
@@ -28,14 +28,7 @@ RUN apt-get install --no-install-recommends -y libyaml-dev libmagickwand-dev lib
 RUN apt-get install --no-install-recommends -y ffmpeg
 RUN apt-get install -y build-essential
 
-RUN mkdir /noto
-ADD https://noto-website.storage.googleapis.com/pkgs/NotoSansCJKjp-hinted.zip /noto
-WORKDIR /noto
-RUN unzip NotoSansCJKjp-hinted.zip && \
-    mkdir -p /usr/share/fonts/noto && \
-    cp *.otf /usr/share/fonts/noto && \
-    chmod 644 -R /usr/share/fonts/noto/
-RUN rm -rf /noto
+RUN apt-get install -y fonts-noto-cjk
 
 WORKDIR "/tmp"
 RUN MINOR=$(echo ${RUBY_VERSION} | sed -e 's/^\([0-9]\+\.[0-9]\+\)\..*$/\1/' ) && curl https://cache.ruby-lang.org/pub/ruby/$MINOR/ruby-${RUBY_VERSION}.tar.gz -o ruby.tar.gz \
